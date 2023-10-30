@@ -1,2 +1,5 @@
 node_modules
 .DS_Store
+
+# Even though these config files can be helpful to others, it's easy enough to share rather than being so perscriptive as to commit them
+.vscode/*
