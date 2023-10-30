@@ -1,9 +1,13 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('node:path');
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'src/preload.ts'),
+    },
   });
 
   // TODO - Make this conditional based on initialization logic
@@ -19,6 +23,7 @@ const logger = () => {
 };
 
 app.whenReady().then(() => {
+  ipcMain.handle('ping', () => `pong ${new Date().toISOString()}`);
   createWindow();
   logger();
 
